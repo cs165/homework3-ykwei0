@@ -117,12 +117,30 @@ class Flashcard {
     let body = document.querySelector('body');
     if(this.deltaX >= 150) {
       body.style.backgroundColor = '#97b7b7';
+      let tmp;
+      tmp = this.right+1;
+      let correct = document.querySelector('.status .correct');
+      correct.textContent = tmp;
+      //if(this.flag[this.count-1]===0) {
+      //  let tmp2;
+      //  tmp2 = this.wrong-1;
+      //  let incorrect = document.querySelector('.status .incorrect');
+      //  incorrect.textContent = tmp2;
+      //}
     }
     else if(this.deltaX <= -150) {
       body.style.backgroundColor = '#97b7b7';
+      let tmp;
+      tmp = this.wrong+1;
+      let incorrect = document.querySelector('.status .incorrect');
+      incorrect.textContent = tmp;
     }
     else {
       body.style.backgroundColor = '#d0e6df';
+      let correct = document.querySelector('.status .correct');
+      let incorrect = document.querySelector('.status .incorrect');
+      correct.textContent = this.right;
+      incorrect.textContent = this.wrong;
     }
   }
   
@@ -137,7 +155,7 @@ class Flashcard {
         if(this.deltaX>=150) {
           if(this.flag[this.count-1]===0) {
             this.totalwrong--;
-            this.wrong--;
+            //this.wrong--;
             this.flag[this.count-1] = 1;
             let incorrect = document.querySelector('.status .incorrect');
             incorrect.textContent = this.wrong;
@@ -148,6 +166,7 @@ class Flashcard {
         }
         else if(this.deltaX<=-150) {
           if(this.flag[this.count-1]===0) {
+            this.wrong++;
             let incorrect = document.querySelector('.status .incorrect');
             incorrect.textContent = this.wrong;
           }
@@ -170,7 +189,7 @@ class Flashcard {
         if(this.deltaX>=150) {
           if(this.flag[this.count-1]===0) {
             this.totalwrong--;
-            this.wrong--;
+            //this.wrong--;
             this.flag[this.count-1] = 1;
             let incorrect = document.querySelector('.status .incorrect');
             incorrect.textContent = this.wrong;
@@ -181,6 +200,7 @@ class Flashcard {
         }
         else if(this.deltaX<=-150) {
           if(this.flag[this.count-1]===0) {
+            this.wrong++;
             let incorrect = document.querySelector('.status .incorrect');
             incorrect.textContent = this.wrong;
           }
@@ -251,6 +271,9 @@ class Flashcard {
       this.backText[i] = this.wrongback[i];
       this.flag[i] = 0;
     }
+    this.wrong = 0;
+    let incorrect = document.querySelector('.status .incorrect');
+    incorrect.textContent = this.wrong;
     this.createFlashcard();
   }
 
